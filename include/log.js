@@ -30,6 +30,10 @@ Log.enable = function( docRef ) {
 	this.logFile = this.logFile.replace('{document}', this.doc.name);
 	this.logFile = this.logFile.replace('{loglevel}', this.logLevel);
 	this.logFile = new Date().strftime(this.logFile);
+
+	// Checking if the log directory exists
+	if (!File(this.logFile).parent.exists) return;
+
 	Stdlib.log.enabled = true;
 	Stdlib.log.append = LOG_APPEND;
 	Stdlib.log.setFile(this.logFile);
